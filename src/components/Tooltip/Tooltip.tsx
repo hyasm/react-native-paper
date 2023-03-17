@@ -123,10 +123,15 @@ const Tooltip = ({
       clearTimeout(hideTooltipTimer.current);
     }
 
-    showTooltipTimer.current = setTimeout(() => {
+    if (isWeb) {
+      showTooltipTimer.current = setTimeout(() => {
+        touched.current = true;
+        setVisible(true);
+      }, enterTouchDelay) as unknown as NodeJS.Timeout;
+    } else {
       touched.current = true;
       setVisible(true);
-    }, enterTouchDelay) as unknown as NodeJS.Timeout;
+    }
   };
 
   const handleTouchEnd = () => {
@@ -149,6 +154,9 @@ const Tooltip = ({
         return children.props.onPress?.();
       }
     }, [children.props]),
+    onLongPress: () => handleTouchStart(),
+    onPressOut: () => handleTouchEnd(),
+    delayLongPress: enterTouchDelay,
   };
 
   const webPressProps = {
@@ -193,17 +201,16 @@ const Tooltip = ({
           </View>
         </Portal>
       )}
-      <View
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
-        onTouchCancel={handleTouchEnd}
+      <Pressable
+        ref={childrenWrapperRef}
+        style={isWeb ? styles.webContainer : null}
+        {...(isWeb ? webPressProps : mobilePressProps)}
       >
         {React.cloneElement(children, {
           ...rest,
-          ref: childrenWrapperRef,
           ...(isWeb ? webPressProps : mobilePressProps),
         })}
-      </View>
+      </Pressable>
     </>
   );
 };
@@ -222,6 +229,9 @@ const styles = StyleSheet.create({
   hidden: {
     opacity: 0,
   },
+  webContainer: {
+    cursor: 'default',
+  } as ViewStyle,
 });
 
 export default Tooltip;
