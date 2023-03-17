@@ -286,6 +286,7 @@ const FAB = forwardRef<View, Props>(
           accessibilityRole="button"
           accessibilityState={newAccessibilityState}
           testID={testID}
+          {...rest}
         >
           <View
             style={[styles.content, label ? extendedStyle : fabStyle]}
