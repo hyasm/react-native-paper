@@ -116,3 +116,7 @@ export type MaterialBottomTabNavigationConfig = Partial<
     | 'getTestID'
   >
 >;
+
+export type NavigationParams = {
+  params?: { headerHeight?: number };
+};

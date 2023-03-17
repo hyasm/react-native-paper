@@ -12,6 +12,7 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useInternalTheme } from '../../core/theming';
+import useInternalNavigation from '../../react-navigation/useInternalNavigation';
 import shadow from '../../styles/shadow';
 import type { ThemeProp } from '../../types';
 import { Appbar } from './Appbar';
@@ -117,6 +118,7 @@ const AppbarHeader = ({
   theme: themeOverrides,
   ...rest
 }: Props) => {
+  const navigation = useInternalNavigation();
   const theme = useInternalTheme(themeOverrides);
   const { isV3 } = theme;
 
@@ -133,6 +135,10 @@ const AppbarHeader = ({
     backgroundColor?: ColorValue;
     zIndex?: number;
   };
+
+  React.useEffect(() => {
+    navigation.setParams({ headerHeight: height });
+  }, [height, navigation]);
 
   const backgroundColor = getAppbarColor(
     theme,
