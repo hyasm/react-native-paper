@@ -2,7 +2,6 @@ import * as React from 'react';
 import {
   Animated,
   GestureResponderEvent,
-  I18nManager,
   Platform,
   StyleProp,
   StyleSheet,
@@ -18,6 +17,7 @@ import color from 'color';
 import { useInternalTheme } from '../core/theming';
 import type { ThemeProp } from '../types';
 import { forwardRef } from '../utils/forwardRef';
+import Locale from '../utils/Locale';
 import ActivityIndicator from './ActivityIndicator';
 import Divider from './Divider';
 import type { IconSource } from './Icon';
@@ -295,7 +295,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
                 name="magnify"
                 color={color}
                 size={size}
-                direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
+                direction={Locale().getConstants().isRTL ? 'rtl' : 'ltr'}
               />
             ))
           }
@@ -356,7 +356,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
                     name={isV3 ? 'close' : 'close-circle-outline'}
                     color={color}
                     size={size}
-                    direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
+                    direction={Locale().getConstants().isRTL ? 'rtl' : 'ltr'}
                   />
                 ))
               }
@@ -405,7 +405,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     paddingLeft: 8,
     alignSelf: 'stretch',
-    textAlign: I18nManager.getConstants().isRTL ? 'right' : 'left',
+    textAlign: Locale().getConstants().isRTL ? 'right' : 'left',
     minWidth: 0,
   },
   barModeInput: {

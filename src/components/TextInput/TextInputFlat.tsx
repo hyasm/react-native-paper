@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
   Animated,
-  I18nManager,
   Platform,
   StyleProp,
   StyleSheet,
@@ -14,6 +13,7 @@ import {
 import type { ThemeProp } from 'src/types';
 
 import { useInternalTheme } from '../../core/theming';
+import Locale from '../../utils/Locale';
 import { AdornmentSide, AdornmentType, InputMode } from './Adornment/enums';
 import TextInputAdornment, {
   TextInputAdornmentProps,
@@ -166,11 +166,9 @@ const TextInputFlat = ({
   const labelHalfHeight = labelHeight / 2;
 
   const baseLabelTranslateX =
-    (I18nManager.getConstants().isRTL ? 1 : -1) *
+    (Locale().getConstants().isRTL ? 1 : -1) *
       (labelHalfWidth - (labelScale * labelWidth) / 2) +
-    (1 - labelScale) *
-      (I18nManager.getConstants().isRTL ? -1 : 1) *
-      paddingLeft;
+    (1 - labelScale) * (Locale().getConstants().isRTL ? -1 : 1) * paddingLeft;
 
   const minInputHeight = dense
     ? (label ? MIN_DENSE_HEIGHT_WL : MIN_DENSE_HEIGHT) - LABEL_PADDING_TOP_DENSE
@@ -264,12 +262,12 @@ const TextInputFlat = ({
     wiggleOffsetX: LABEL_WIGGLE_X_OFFSET,
     topPosition,
     paddingLeft: isAndroid
-      ? I18nManager.isRTL
+      ? Locale().isRTL
         ? paddingRight
         : paddingLeft
       : paddingLeft,
     paddingRight: isAndroid
-      ? I18nManager.isRTL
+      ? Locale().isRTL
         ? paddingLeft
         : paddingRight
       : paddingRight,
@@ -400,7 +398,7 @@ const TextInputFlat = ({
               textAlignVertical: multiline ? 'top' : 'center',
               textAlign: textAlign
                 ? textAlign
-                : I18nManager.getConstants().isRTL
+                : Locale().getConstants().isRTL
                 ? 'right'
                 : 'left',
             },

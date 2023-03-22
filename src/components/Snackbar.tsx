@@ -2,7 +2,6 @@ import * as React from 'react';
 import {
   Animated,
   Easing,
-  I18nManager,
   StyleProp,
   StyleSheet,
   View,
@@ -14,6 +13,7 @@ import useLatestCallback from 'use-latest-callback';
 
 import { useInternalTheme } from '../core/theming';
 import type { $RemoveChildren, ThemeProp } from '../types';
+import Locale from '../utils/Locale';
 import Button from './Button/Button';
 import type { IconSource } from './Icon';
 import IconButton from './IconButton/IconButton';
@@ -326,7 +326,7 @@ const Snackbar = ({
                         color={color}
                         size={size}
                         direction={
-                          I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'
+                          Locale().getConstants().isRTL ? 'rtl' : 'ltr'
                         }
                       />
                     );

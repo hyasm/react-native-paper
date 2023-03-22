@@ -6,7 +6,6 @@ import {
   Easing,
   EmitterSubscription,
   findNodeHandle,
-  I18nManager,
   Keyboard,
   KeyboardEvent as RNKeyboardEvent,
   LayoutRectangle,
@@ -25,6 +24,7 @@ import { APPROX_STATUSBAR_HEIGHT } from '../../constants';
 import { withInternalTheme } from '../../core/theming';
 import type { $Omit, InternalTheme } from '../../types';
 import { addEventListener } from '../../utils/addEventListener';
+import Locale from '../../utils/Locale';
 import Portal from '../Portal/Portal';
 import Surface from '../Surface';
 import MenuItem from './MenuItem';
@@ -600,7 +600,7 @@ class Menu extends React.Component<Props, State> {
 
     const positionStyle = {
       top: this.isCoordinate(anchor) ? top : top + additionalVerticalValue,
-      ...(I18nManager.getConstants().isRTL ? { right: left } : { left }),
+      ...(Locale().getConstants().isRTL ? { right: left } : { left }),
     };
 
     return (

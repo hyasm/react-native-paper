@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {
-  I18nManager,
   StyleProp,
   StyleSheet,
   Text as NativeText,
@@ -10,6 +9,7 @@ import {
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import { forwardRef } from '../../utils/forwardRef';
+import Locale from '../../utils/Locale';
 import type { VariantProp } from './types';
 
 export type Props<T> = React.ComponentProps<typeof NativeText> & {
@@ -89,7 +89,7 @@ const Text = (
   const root = React.useRef<NativeText | null>(null);
   // FIXME: destructure it in TS 4.6+
   const theme = useInternalTheme(initialTheme);
-  const writingDirection = I18nManager.getConstants().isRTL ? 'rtl' : 'ltr';
+  const writingDirection = Locale().getConstants().isRTL ? 'rtl' : 'ltr';
 
   React.useImperativeHandle(ref, () => ({
     setNativeProps: (args: Object) => root.current?.setNativeProps(args),

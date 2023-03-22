@@ -1,10 +1,11 @@
-import { Animated, ColorValue, I18nManager, ViewStyle } from 'react-native';
+import type { Animated, ColorValue, ViewStyle } from 'react-native';
 
 import color from 'color';
 
 import { black, white } from '../../styles/themes/v2/colors';
 import type { InternalTheme } from '../../types';
 import getContrastingColor from '../../utils/getContrastingColor';
+import Locale from '../../utils/Locale';
 
 type GetCombinedStylesProps = {
   isAnimatedFromRight: boolean;
@@ -33,7 +34,7 @@ export const getCombinedStyles = ({
   distance,
   animFAB,
 }: GetCombinedStylesProps): CombinedStyles => {
-  const { isRTL } = I18nManager;
+  const { isRTL } = Locale();
 
   const defaultPositionStyles = { left: -distance, right: undefined };
 

@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { Animated, I18nManager, StyleSheet, TextStyle } from 'react-native';
+import { Animated, StyleSheet, TextStyle } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
+import Locale from '../../utils/Locale';
 import type { VariantProp } from './types';
 
 type Props<T> = React.ComponentPropsWithRef<typeof Animated.Text> & {
@@ -40,7 +41,7 @@ function AnimatedText({
   ...rest
 }: Props<never>) {
   const theme = useInternalTheme(themeOverrides);
-  const writingDirection = I18nManager.getConstants().isRTL ? 'rtl' : 'ltr';
+  const writingDirection = Locale().getConstants().isRTL ? 'rtl' : 'ltr';
 
   if (theme.isV3 && variant) {
     const font = theme.fonts[variant];

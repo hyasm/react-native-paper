@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { I18nManager, Platform, StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 
 import {
   CommonActions,
@@ -11,6 +11,7 @@ import {
 
 import BottomNavigation from '../../components/BottomNavigation/BottomNavigation';
 import MaterialCommunityIcon from '../../components/MaterialCommunityIcon';
+import Locale from '../../utils/Locale';
 import { useNavigationLink } from '../adapter';
 import type {
   MaterialBottomTabDescriptorMap,
@@ -110,7 +111,7 @@ export default function MaterialBottomTabView({
         if (typeof options.tabBarIcon === 'string') {
           return (
             <MaterialCommunityIcon
-              direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
+              direction={Locale().getConstants().isRTL ? 'rtl' : 'ltr'}
               name={options.tabBarIcon}
               color={color}
               size={24}

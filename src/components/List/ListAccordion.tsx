@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
   GestureResponderEvent,
-  I18nManager,
   StyleProp,
   StyleSheet,
   TextStyle,
@@ -12,6 +11,7 @@ import {
 
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
+import Locale from '../../utils/Locale';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
@@ -266,7 +266,7 @@ const ListAccordion = ({
                   name={isExpanded ? 'chevron-up' : 'chevron-down'}
                   color={theme.isV3 ? descriptionColor : titleColor}
                   size={24}
-                  direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
+                  direction={Locale().getConstants().isRTL ? 'rtl' : 'ltr'}
                 />
               )}
             </View>

@@ -1,14 +1,10 @@
 import * as React from 'react';
-import {
-  I18nManager,
-  Image,
-  ImageSourcePropType,
-  Platform,
-} from 'react-native';
+import { Image, ImageSourcePropType, Platform } from 'react-native';
 
 import { Consumer as SettingsConsumer } from '../core/settings';
 import { useInternalTheme } from '../core/theming';
 import type { ThemeProp } from '../types';
+import Locale from '../utils/Locale';
 import { accessibilityProps } from './MaterialCommunityIcon';
 
 type IconSourceBase = string | ImageSourcePropType;
@@ -78,7 +74,7 @@ const Icon = ({
   const direction =
     typeof source === 'object' && source.direction && source.source
       ? source.direction === 'auto'
-        ? I18nManager.getConstants().isRTL
+        ? Locale().getConstants().isRTL
           ? 'rtl'
           : 'ltr'
         : source.direction

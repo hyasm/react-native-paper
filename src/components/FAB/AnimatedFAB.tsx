@@ -8,7 +8,6 @@ import {
   Animated,
   Easing,
   GestureResponderEvent,
-  I18nManager,
   Platform,
   ScrollView,
   StyleProp,
@@ -22,6 +21,7 @@ import color from 'color';
 
 import { useInternalTheme } from '../../core/theming';
 import type { $RemoveChildren, ThemeProp } from '../../types';
+import Locale from '../../utils/Locale';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
 import Surface from '../Surface';
@@ -126,7 +126,6 @@ const SCALE = 0.9;
  *   ScrollView,
  *   Text,
  *   SafeAreaView,
- *   I18nManager,
  * } from 'react-native';
  * import { AnimatedFAB } from 'react-native-paper';
  *
@@ -213,7 +212,7 @@ const AnimatedFAB = ({
   const isIOS = Platform.OS === 'ios';
   const isAnimatedFromRight = animateFrom === 'right';
   const isIconStatic = iconMode === 'static';
-  const { isRTL } = I18nManager;
+  const { isRTL } = Locale();
   const { current: visibility } = React.useRef<Animated.Value>(
     new Animated.Value(visible ? 1 : 0)
   );
